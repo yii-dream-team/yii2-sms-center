@@ -19,7 +19,7 @@ class SmsRu extends Component implements TransportInterface
 
     public function init()
     {
-        $this->_api = new Api($this->apiId);
+        $this->api = new Api($this->apiId);
     }
 
     public function getApi()
