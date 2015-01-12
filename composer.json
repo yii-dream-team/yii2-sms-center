@@ -26,5 +26,10 @@
     "php":">=5.4",
     "yiisoft/yii2": "~2",
     "yii-dream-team/smsru": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "yiidreamteam\\sms\\": "./src"
+    }
   }
 }
