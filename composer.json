@@ -1,0 +1,30 @@
+{
+  "name": "yii-dream-team/yii2-sms-module",
+  "description": "Yii2 SMS Center",
+  "type": "yii-extension",
+  "keywords": [
+    "yii2",
+    "sms",
+    "text"
+  ],
+  "homepage": "http://yiidreamteam.com/yii2/sms-center",
+  "license": "MIT",
+  "authors": [
+    {
+    "name": "Alexey Samoylov",
+    "email": "alexey.samoylov@gmail.com",
+    "homepage": "http://yiidreamteam/team/alexey",
+    "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/yii-dream-team/yii2-sms-center/issues",
+    "source": "https://github.com/yii-dream-team/yii2-sms-center"
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "php":">=5.4",
+    "yiisoft/yii2": "~2",
+    "yii-dream-team/smsru": "*"
+  }
+}
