@@ -7,6 +7,7 @@ namespace yiidreamteam\sms\commands;
 
 use yii\console\Controller;
 use yiidreamteam\sms\models\Message;
+use yiidreamteam\sms\SmsCenter;
 
 class SpoolCommand extends Controller
 {
