@@ -7,13 +7,14 @@ namespace yiidreamteam\sms;
 
 use yii\base\Component as BaseComponent;
 use yii\base\InvalidConfigException;
-use yiidreamteam\sms\interfaces\TransportInterface;
+use yii\helpers\VarDumper;
+use yiidreamteam\sms\interfaces\SmsTransportInterface;
 
-class SmsCenter extends BaseComponent implements TransportInterface
+class SmsCenter extends BaseComponent implements SmsTransportInterface
 {
     /** @var string */
     public $defaultTransport;
-    /** @var TransportInterface[] */
+    /** @var SmsTransportInterface[] */
     public $transports = [];
 
     /**
@@ -47,6 +48,7 @@ class SmsCenter extends BaseComponent implements TransportInterface
         try {
             $result = $this->transports[$this->defaultTransport]->send($to, $text);
         } catch (\Exception $e) {
+            \Yii::error("Message to {$to} sending failure: " . $e->getMessage());
             $result = false;
         }
         return $result;

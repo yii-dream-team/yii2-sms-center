@@ -6,10 +6,10 @@
 namespace yiidreamteam\sms\transports;
 
 use yii\base\Component;
-use yiidreamteam\sms\interfaces\TransportInterface;
+use yiidreamteam\sms\interfaces\SmsTransportInterface;
 use yiidreamteam\smsru\Api;
 
-class SmsRu extends Component implements TransportInterface
+class SmsRu extends Component implements SmsTransportInterface
 {
     public $apiId;
     public $sender = null;

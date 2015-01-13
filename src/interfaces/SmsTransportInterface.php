@@ -5,7 +5,7 @@
 
 namespace yiidreamteam\sms\interfaces;
 
-interface TransportInterface
+interface SmsTransportInterface
 {
     /**
      * @param string $to

@@ -9,9 +9,10 @@ use yii\console\Controller;
 use yiidreamteam\sms\models\Message;
 use yiidreamteam\sms\SmsCenter;
 
-class SpoolCommand extends Controller
+class SmsCommand extends Controller
 {
     public $componentName = 'sms';
+
     /** @var SmsCenter */
     protected $component;
 
