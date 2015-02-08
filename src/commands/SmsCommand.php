@@ -49,7 +49,7 @@ class SmsCommand extends Controller
 
         $transaction = $db->beginTransaction();
         try {
-            $model->status = $this->component->send($model->to, $model->text)
+            $model->status = $this->component->send($model->to, $model->text, $model->transport)
                 ? Message::STATUS_SENT : Message::STATUS_ERROR;
             $model->updateAttributes(['status']);
             $transaction->commit();

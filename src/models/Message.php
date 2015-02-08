@@ -18,6 +18,7 @@ use yii\db\Expression;
  * @property integer $priority
  * @property string $to
  * @property string $text
+ * @property string $transport
  * @property string $createdAt
  * @property string $updatedAt
  */
@@ -59,7 +60,7 @@ class Message extends ActiveRecord
     {
         return [
             [['status', 'priority'], 'integer'],
-            [['to', 'text'], 'string', 'max' => 255]
+            [['to', 'text', 'transport'], 'string', 'max' => 255],
         ];
     }
 
@@ -72,6 +73,7 @@ class Message extends ActiveRecord
             'id' => 'ID',
             'status' => 'Status',
             'priority' => 'Priority',
+            'transport' => 'Transport',
             'to' => 'To',
             'text' => 'Text',
             'createdAt' => 'Created At',
@@ -83,14 +85,17 @@ class Message extends ActiveRecord
      * @param $to
      * @param $text
      * @param int $priority
+     * @param null|string $transport
      */
-    public static function queue($to, $text, $priority = 0)
+    public static function queue($to, $text, $priority = 0, $transport = null)
     {
         $model = new static([
             'to' => $to,
             'text' => $text,
-            'priority' => $priority
+            'priority' => $priority,
+            'transport' => $transport,
+            'status' => static::STATUS_NEW
         ]);
-        $model->save(false);
+        return $model->save(false);
     }
 }

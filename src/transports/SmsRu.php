@@ -32,4 +32,10 @@ class SmsRu extends Component implements SmsTransportInterface
         $result = $this->api->send($to, $text, $this->sender);
         return $result['code'] == '100';
     }
+
+    public function cost($to, $text)
+    {
+        $result = $this->api->cost($to, $text);
+        return $result['code'] == '100';
+    }
 }

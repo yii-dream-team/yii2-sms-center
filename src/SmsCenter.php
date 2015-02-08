@@ -7,15 +7,20 @@ namespace yiidreamteam\sms;
 
 use yii\base\Component as BaseComponent;
 use yii\base\InvalidConfigException;
-use yii\helpers\VarDumper;
 use yiidreamteam\sms\interfaces\SmsTransportInterface;
+use yiidreamteam\sms\models\Message;
 
+/**
+ * Class SmsCenter
+ * @package yiidreamteam\sms
+ */
 class SmsCenter extends BaseComponent implements SmsTransportInterface
 {
     /** @var string */
     public $defaultTransport;
     /** @var SmsTransportInterface[] */
     public $transports = [];
+    /** @var string */
 
     /**
      * @inheritdoc
@@ -41,16 +46,59 @@ class SmsCenter extends BaseComponent implements SmsTransportInterface
      *
      * @param string $to
      * @param string $text
+     * @param null|string $transport
      * @return bool
      */
-    public function send($to, $text)
+    public function send($to, $text, $transport = null)
     {
         try {
-            $result = $this->transports[$this->defaultTransport]->send($to, $text);
+            $result = $this->getTransport($transport)->send($to, $text);
         } catch (\Exception $e) {
             \Yii::error("Message to {$to} sending failure: " . $e->getMessage());
             $result = false;
         }
+
         return $result;
+    }
+
+    /**
+     * Get transport to perform some operation
+     * If transport is not specified
+     * will be used defaultTransport
+     *
+     * @param null $transport
+     * @return SmsTransportInterface
+     */
+    public function getTransport($transport = null)
+    {
+        if (empty($transport))
+            $transport = $this->defaultTransport;
+
+        if (!array_key_exists($transport, $this->transports))
+            throw new \BadMethodCallException('Bad transport ID');
+
+        return $this->transports[$transport];
+    }
+
+    /**
+     * Put message to queue
+     *
+     * @param $to
+     * @param $text
+     * @param int $priority
+     * @param string|null $transport
+     * @return bool
+     */
+    public function queue($to, $text, $priority = 0, $transport = null)
+    {
+        if (empty($transport))
+            $transport = $this->defaultTransport;
+
+        if (!array_key_exists($transport, $this->transports))
+            throw new \BadMethodCallException('Bad transport ID');
+
+        Message::queue($to, $text, $priority, $transport);
+
+        return true;
     }
 }
