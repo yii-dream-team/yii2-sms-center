@@ -18,6 +18,6 @@ class StatController extends \yii\web\Controller
             'error' => Message::find()->where(['status' => Message::STATUS_ERROR])->count(),
         ];
 
-        return $this->render('dashboard', ['stat' => $stat]);
+        return $this->render('@vendor/yii-dream-team/yii2-sms-center/src/backend/views/stat/dashboard', ['stat' => $stat]);
     }
 }
