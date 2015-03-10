@@ -6,6 +6,7 @@
 namespace yiidreamteam\sms\transports;
 
 use yii\base\Component;
+use yii\helpers\VarDumper;
 use yiidreamteam\sms\interfaces\SmsTransportInterface;
 use yiidreamteam\smspilot\Api;
 
@@ -35,8 +36,14 @@ class SmsPilot extends Component implements SmsTransportInterface
     public function send($to, $text)
     {
         try {
+            $to = preg_replace('/[^0-9]/', '', $to);
             $result = $this->api->send($to, $text, $this->sender);
-            return $result['send'][0]['status'] == 0;
+            if ($result['send'][0]['status'] == 0) {
+                return true;
+            } else {
+                \Yii::trace(VarDumper::dumpAsString($result['send']), 'sms.smspilot');
+                return false;
+            }
         } catch (\Exception $e) {
             \Yii::error($e->getMessage(), 'sms.smspilot');
             return false;
