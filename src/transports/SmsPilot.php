@@ -41,6 +41,7 @@ class SmsPilot extends Component implements SmsTransportInterface
             if ($result['send'][0]['status'] == 0) {
                 return true;
             } else {
+                \Yii::error('SmsPilot error ' . $result['send'][0]['status'], 'sms.smspilot');
                 \Yii::trace(VarDumper::dumpAsString($result['send']), 'sms.smspilot');
                 return false;
             }
