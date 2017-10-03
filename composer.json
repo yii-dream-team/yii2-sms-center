@@ -27,7 +27,7 @@
     "yiisoft/yii2": "~2",
     "yii-dream-team/smsru": "*",
     "yii-dream-team/smspilot": "*",
-    "yarcode/epochtasms": "dev-master"
+    "yarcode/epochta-sms": "1.1"
   },
   "repositories": [
     {
