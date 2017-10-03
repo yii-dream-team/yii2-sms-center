@@ -26,8 +26,15 @@
     "php":">=5.4",
     "yiisoft/yii2": "~2",
     "yii-dream-team/smsru": "*",
-    "yii-dream-team/smspilot": "*"
+    "yii-dream-team/smspilot": "*",
+    "yarcode/epochtasms": "dev-master"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/yarcode/epochtasms.git"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "yiidreamteam\\sms\\": "./src"
